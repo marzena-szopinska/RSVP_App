@@ -40,43 +40,30 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function createLI(text) {
+    function createElement(elementName, property, value) {
+      const element = document.createElement(elementName);
+      element[property] = value;
+      return element;
+    }
+
+    function appendToLI(elementName, property, value) {
+      const element = createElement(elementName, property, value);
+      // append the span to li element
+      li.appendChild(element);
+      return element;
+    }
     // create list element
    const li = document.createElement('li');
-   // create span element
-   const span = document.createElement('span');
-   // set text content for the span element
-   span.textContent = text;
-   // append the span to li element
-   li.appendChild(span);
-   // create a label
-   const label = document.createElement('label');
-   // set the label text content to Confirmed
-   label.textContent = 'Confirmed';
-   // create an input
-   const checkbox = document.createElement('input');
-   // set input type to checkbox
-   checkbox.type = 'checkbox';
-   // append the checkbox to the label
-   label.appendChild(checkbox);
-   // append the label to the list element
-   li.appendChild(label);
+   appendToLI('span', 'textContent', text);
+   appendToLI('label', 'textContent', 'Confirmed')
+    .appendChild(createElement('input', 'type', 'checkbox'));
+   appendToLI('button', 'textContent', 'edit');
+   appendToLI('button', 'textContent', 'remove');
 
-   // create a button
-   const editButton = document.createElement('button');
-   // set button text content to edit
-   editButton.textContent = 'edit';
-   // append the edit button to the li element
-   li.appendChild(editButton);
-
-   // create a button
-   const removeButton = document.createElement('button');
-   // set button text content to remove
-   removeButton.textContent = 'remove';
-   // append the button to the li element
-   li.appendChild(removeButton);
   // return li element
    return li;
   }
+
   // add event on submit for our button
   form.addEventListener('submit', (e) => {
     // *** ADDING PEOPLE TO THE LIST AS WELL AS CHECKBOXES FOR ONFIRMATION ***
