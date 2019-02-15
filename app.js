@@ -104,39 +104,47 @@ document.addEventListener('DOMContentLoaded', () => {
       const button = e.target;
       const li = e.target.parentNode;
       const ul = li.parentNode;
+      const action = button.textContent;
 
-      if(button.textContent === 'remove'){
-        // remove the whole li element
-        ul.removeChild(li);
-      } else if(button.textContent === 'edit'){
-        // target the span element
-        const span = li.firstElementChild;
-        // create an input
-        const input = document.createElement('input');
-        // set input's type to text
-        input.type = 'text';
-        // get the name to edit
-        input.value = span.textContent;
-        // insert the new input element
-        li.insertBefore(input, span);
-        // remove span element
-        li.removeChild(span);
-        // change the button text to save
-        button.textContent = 'save';
-      } else if (button.textContent === 'save'){
-        // target the input element
-        const input = li.firstElementChild;
-        // create a span element
-        const span = document.createElement('span');
-        // set span's text to whats inside the input
-        span.textContent = input.value;
-        // insert the span before the input
-        li.insertBefore(span, input);
-        // remove the input
-        li.removeChild(input);
-        // change the button text to save
-        button.textContent = 'edit';
-      }
+      const nameActions = {
+        remove: () => {
+            // remove the whole li element
+            ul.removeChild(li);
+        },
+        edit: () => {
+            // target the span element
+            const span = li.firstElementChild;
+            // create an input
+            const input = document.createElement('input');
+            // set input's type to text
+            input.type = 'text';
+            // get the name to edit
+            input.value = span.textContent;
+            // insert the new input element
+            li.insertBefore(input, span);
+            // remove span element
+            li.removeChild(span);
+            // change the button text to save
+            button.textContent = 'save';
+        },
+        save: () => {
+            // target the input element
+            const input = li.firstElementChild;
+            // create a span element
+            const span = document.createElement('span');
+            // set span's text to whats inside the input
+            span.textContent = input.value;
+            // insert the span before the input
+            li.insertBefore(span, input);
+            // remove the input
+            li.removeChild(input);
+            // change the button text to save
+            button.textContent = 'edit';
+          }
+      };
+
+      // select and run action in button's name
+      nameActions[action]();
     }
   });
 });
