@@ -3,6 +3,32 @@ const input = form.querySelector('input');
 // select ul element
 const ul = document.getElementById('invitedList');
 
+function createLI(text) {
+  // create list element
+ const li = document.createElement('li');
+ // set text content for the li element
+ li.textContent = text;
+ // create a label
+ const label = document.createElement('label');
+ // set the label text content to Confirmed
+ label.textContent = 'Confirmed';
+ // create an input
+ const checkbox = document.createElement('input');
+ // set input type to checkbox
+ checkbox.type = 'checkbox';
+ // append the checkbox to the label
+ label.appendChild(checkbox);
+ // append the label to the list element
+ li.appendChild(label);
+ // create a button
+ const button = document.createElement('button');
+ // set button text content to remove
+ button.textContent = 'remove';
+ // append the button to the li element
+ li.appendChild(button);
+// return li element 
+ return li;
+}
 // add event on submit for our button
 form.addEventListener('submit', (e) => {
   // *** ADDING PEOPLE TO THE LIST AS WELL AS CHECKBOXES FOR ONFIRMATION ***
@@ -12,28 +38,7 @@ form.addEventListener('submit', (e) => {
   const text = input.value;
   // clear the input
   input.value = '';
-  // create list element
-  const li = document.createElement('li');
-  // set text content for the li element
-  li.textContent = text;
-  // create a label
-  const label = document.createElement('label');
-  // set the label text content to Confirmed
-  label.textContent = 'Confirmed';
-  // create an input
-  const checkbox = document.createElement('input');
-  // set input type to checkbox
-  checkbox.type = 'checkbox';
-  // append the checkbox to the label
-  label.appendChild(checkbox);
-  // append the label to the list element
-  li.appendChild(label);
-  // create a button
-  const button = document.createElement('button');
-  // set button text content to remove
-  button.textContent = 'remove';
-  // append the button to the li element
-  li.appendChild(button);
+  const li = createLI(text);
   // place the li element inside the unordered list element
   ul.appendChild(li);
 });
