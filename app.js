@@ -1,7 +1,42 @@
 const form = document.getElementById('registrar');
 const input = form.querySelector('input');
+// select the main div
+const mainDiv = document.querySelector('.main');
 // select ul element
 const ul = document.getElementById('invitedList');
+
+const div = document.createElement('div');
+const filterLabel = document.createElement('label');
+const filterCheckBox = document.createElement('input');
+// add text content to the label
+filterLabel.textContent = "Hide those who haven't responded";
+// set input type to checkbox
+filterCheckBox.type = 'checkbox';
+// append filter element to the div element
+div.appendChild(filterLabel);
+div.appendChild(filterCheckBox);
+// insert div before the unordered list element
+mainDiv.insertBefore(div, ul);
+
+filterCheckBox.addEventListener('change', (e) => {
+  const isChecked = e.target.checked;
+  const lis = ul.children; // referene to the collection
+  if(isChecked){
+    for(let i = 0; i < lis.length; i+=1){
+      let li = lis[i];
+      if(li.className === 'responded'){
+        li.style.display = '';
+      } else {
+        li.style.display = 'none';
+      }
+    }
+  } else {
+    for(let i = 0; i < lis.length; i+=1){
+      let li = lis[i];
+      li.style.display = '';
+    }
+  }
+});
 
 function createLI(text) {
   // create list element
