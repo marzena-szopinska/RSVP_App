@@ -6,8 +6,12 @@ const ul = document.getElementById('invitedList');
 function createLI(text) {
   // create list element
  const li = document.createElement('li');
- // set text content for the li element
- li.textContent = text;
+ // create span element
+ const span = document.createElement('span');
+ // set text content for the span element
+ span.textContent = text;
+ // append the span to li element
+ li.appendChild(span);
  // create a label
  const label = document.createElement('label');
  // set the label text content to Confirmed
@@ -77,12 +81,38 @@ ul.addEventListener('click', (e) => {
     const button = e.target;
     const li = e.target.parentNode;
     const ul = li.parentNode;
-    
+
     if(button.textContent === 'remove'){
       // remove the whole li element
       ul.removeChild(li);
     } else if(button.textContent === 'edit'){
-      console.log('edit');
+      // target the span element
+      const span = li.firstElementChild;
+      // create an input
+      const input = document.createElement('input');
+      // set input's type to text
+      input.type = 'text';
+      // get the name to edit
+      input.value = span.textContent;
+      // insert the new input element
+      li.insertBefore(input, span);
+      // remove span element
+      li.removeChild(span);
+      // change the button text to save
+      button.textContent = 'save';
+    } else if (button.textContent === 'save'){
+      // target the input element
+      const input = li.firstElementChild;
+      // create a span element
+      const span = document.createElement('span');
+      // set span's text to whats inside the input
+      span.textContent = input.value;
+      // insert the span before the input
+      li.insertBefore(span, input);
+      // remove the input
+      li.removeChild(input);
+      // change the button text to save
+      button.textContent = 'edit';
     }
   }
 });
