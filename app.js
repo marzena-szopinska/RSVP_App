@@ -5,7 +5,7 @@ const ul = document.getElementById('invitedList');
 
 // add event on submit for our button
 form.addEventListener('submit', (e) => {
-  // *** ADDING PEOPLE TO THE LIST ***
+  // *** ADDING PEOPLE TO THE LIST AS WELL AS CHECKBOXES FOR ONFIRMATION ***
   // prevent page reload on submit
   e.preventDefault();
   // store the name
@@ -28,10 +28,17 @@ form.addEventListener('submit', (e) => {
   label.appendChild(checkbox);
   // append the label to the list element
   li.appendChild(label);
+  // create a button
+  const button = document.createElement('button');
+  // set button text content to remove
+  button.textContent = 'remove';
+  // append the button to the li element
+  li.appendChild(button);
   // place the li element inside the unordered list element
   ul.appendChild(li);
 });
 
+// CONFIRMING INVITATIONS
 ul.addEventListener('change', (e) => {
   //console.log(e.target.checked);
   const checkbox = e.target;
@@ -41,10 +48,22 @@ ul.addEventListener('change', (e) => {
   const listItem = checkbox.parentNode.parentNode;
   // set the list class name
   if(checked) {
+    //... to responded
     listItem.className = 'responded';
   }
   else
   {
+    // ... to empty class
     listItem.className = '';
+  }
+});
+
+// REMOVING PEOPLE FROM THE LIST
+ul.addEventListener('click', (e) => {
+  if(e.target.tagName === 'BUTTON'){
+    const li = e.target.parentNode;
+    const ul = li.parentNode;
+    // remove the whole li element
+    ul.removeChild(li);
   }
 });
