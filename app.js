@@ -20,13 +20,21 @@ function createLI(text) {
  label.appendChild(checkbox);
  // append the label to the list element
  li.appendChild(label);
+
  // create a button
- const button = document.createElement('button');
+ const editButton = document.createElement('button');
+ // set button text content to edit
+ editButton.textContent = 'edit';
+ // append the edit button to the li element
+ li.appendChild(editButton);
+
+ // create a button
+ const removeButton = document.createElement('button');
  // set button text content to remove
- button.textContent = 'remove';
+ removeButton.textContent = 'remove';
  // append the button to the li element
- li.appendChild(button);
-// return li element 
+ li.appendChild(removeButton);
+// return li element
  return li;
 }
 // add event on submit for our button
@@ -66,9 +74,15 @@ ul.addEventListener('change', (e) => {
 // REMOVING PEOPLE FROM THE LIST
 ul.addEventListener('click', (e) => {
   if(e.target.tagName === 'BUTTON'){
+    const button = e.target;
     const li = e.target.parentNode;
     const ul = li.parentNode;
-    // remove the whole li element
-    ul.removeChild(li);
+    
+    if(button.textContent === 'remove'){
+      // remove the whole li element
+      ul.removeChild(li);
+    } else if(button.textContent === 'edit'){
+      console.log('edit');
+    }
   }
 });
